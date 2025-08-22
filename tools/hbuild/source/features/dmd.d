@@ -39,7 +39,7 @@ void initialize()
     DMDFeature = Feature(
         "DMD",
         "Digital Mars D Compiler. Used for fast iteration development", 
-        ExistenceChecker(["dmdPath"], ["dmd"]),
+        ExistenceChecker(["dmdPath"]),
         Installation([Download(
             DownloadURL(
                 windows: "https://downloads.dlang.org/releases/2.x/$VERSION/dmd.$VERSION.windows.7z",
