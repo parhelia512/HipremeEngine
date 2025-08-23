@@ -20,12 +20,6 @@ Download[] downlloads)
 	version(Windows)
 	{
         string gitPath = buildNormalizedPath(std.file.getcwd(), "buildtools", "git");
-        if(!extractToFolder(downlloads[0].getOutputPath, "git.zip",
-        t, input))
-        {
-            t.writelnError("Git installation failed");
-            return false;
-        }
         configs["git"] = buildNormalizedPath(gitPath, "cmd");
         updateConfigFile();
 		return true;
@@ -46,11 +40,12 @@ void initialize()
 		Installation([
 			Download(
 				DownloadURL(
-					windows: "https://github.com/git-for-windows/git/releases/download/v2.40.1.windows.1/MinGit-2.40.1-64-bit.zip"
+					windows: "https://github.com/git-for-windows/git/releases/download/v2.40.1.windows.1/MinGit-2.40.1-64-bit.zip",
+					osx: "https://github.com/git-for-windows/git/releases/download/v2.40.1.windows.1/MinGit-2.40.1-64-bit.zip",
 				),
-				outputPath: "$CWD/buildtools/git"
+				outputPath: "$TEMP$NAME"
 			),
-		], toDelegate(&installGit)
+		], toDelegate(&installGit), ["$CWD/buildtools/git"]
 	));
 }
 void start()
